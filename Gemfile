@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3.4'
+gem 'rails', '~> 6.1.3.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'activerecord-postgres_enum', '~> 1.5'
@@ -19,6 +19,14 @@ gem 'jbuilder', '~> 2.10'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
+
+# Be sure to require rack_mini_profiler below the pg and mysql gems in your Gemfile.
+# rack_mini_profiler will identify these gems if they are loaded to insert instrumentation.
+# If included too early no SQL will show up.
+gem 'rack-mini-profiler', '~> 2.2.1'
+gem 'memory_profiler'
+gem 'stackprof'
+gem 'flamegraph'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
