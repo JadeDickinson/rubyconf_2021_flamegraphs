@@ -25,6 +25,15 @@ Please also have a personal or work project you'd like to optimise an area of re
 
 Please send questions about the workshop or setup to Jade in the channel for the workshop, __NAME__, in the conference Discord.
 
+## Installation of Rack Mini Profiler with default Speedscope renderer for your own project
+Add the following to Gemfile below your database gem e.g. `pg`, `mysql`, `mongoid` and run bundle install:
+
+```ruby
+gem 'rack-mini-profiler'
+gem 'memory_profiler'
+gem 'stackprof'
+```
+(from https://github.com/MiniProfiler/rack-mini-profiler#installation)
 ## Notes on use of Abalone as example
 Please note my use of Abalone as an example isn't to suggest this app is slow. I simply found while contributing to it last Hacktoberfest that the setup instructions are very clear. It is a good example of a Rails app where we can recognise common patterns in flamegraphs. We’ll mainly use it to get comfortable with reading flamegraphs before looking at your own projects.
 
