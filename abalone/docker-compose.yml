@@ -1,0 +1,61 @@
+version: '2.4'
+services:
+  db:
+    image: postgres
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+      - ./bin/dbinit:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: dockerpg
+      POSTGRES_PASSWORD: supersecret
+    ports:
+      - "127.0.0.1:54321:5432"
+    healthcheck:
+      test: pg_isready --host=db --user=dockerpg --dbname=abalone_development
+
+  app: &app
+    build: .
+    image: abalone
+    environment:
+      RAILS_ENV: development
+      ABALONE_DATABASE_HOSTNAME: db
+      DATABASE_URL: postgres://dockerpg:supersecret@db
+    volumes:
+      - .:/myapp
+      - apptmp:/myapp/tmp
+    tmpfs:
+      - /myapp/tmp/pids
+    depends_on:
+      db:
+        condition: service_healthy
+  web:
+    <<: *app
+    ports:
+      - "127.0.0.1:3000:3000"
+  delayed_job:
+    <<: *app
+    command: bundle exec rails jobs:work
+  # These are convenience "services" intended to be "run" once and removed
+  # not "docker-compose up"'d for a long running process
+  schema_migrate:
+    <<: *app
+    command: bundle exec rails db:migrate
+  pending_migrations:
+    <<: *app
+    command: bundle exec rails db:migrate:status
+  seeds:
+    <<: *app
+    command: bundle exec rails db:seed
+  console:
+    <<: *app
+    command: bundle exec rails console
+  rspec:
+    <<: *app
+    command: bundle exec rspec
+  rubocop:
+    <<: *app
+    command: bundle exec rubocop -a
+
+volumes:
+  dbdata:
+  apptmp:

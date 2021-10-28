@@ -1,0 +1,35 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">File Upload</h1>
+
+    <p class="subtitle is-size-6">Select the type of spreadsheet and select up to 10 .xlsx or .csv spreadsheets. <br /> CSV files are recommended for large spreadsheets (over 1000 rows).</p>
+
+    <%= form_tag({action: :upload}, multipart: true, method: 'post') do %>
+      <div class="field">
+        <%= label_tag(:category, 'Category', class: 'label') %>
+        <div class="control">
+          <div class="select">
+            <%= select_tag(:category, options_for_select(@categories), required: true) %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div>
+          <%= label_tag('input_file', 'Select up to 10 files to upload', class: 'label') %>
+          <%= file_field_tag 'input_files[]', multiple: true, required: true %>
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <%= submit_tag('Submit', class: 'button is-primary') %>
+        </div>
+
+        <div class="control">
+          <%= link_to 'Cancel', file_uploads_path, class: 'button is-light' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>

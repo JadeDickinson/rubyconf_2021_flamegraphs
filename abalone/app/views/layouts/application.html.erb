@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <title>Abalone Analytics</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bulma-calendar@6.0.7/dist/css/bulma-calendar.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bulma-calendar@6.0.7/dist/js/bulma-calendar.min.js"></script>
+
+    <%= stylesheet_pack_tag   'styles', media: 'all' %>
+    <%= stylesheet_link_tag   'application', media: 'all' %>
+
+  </head>
+
+  <body>
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <div class="pl-2 flex logo">
+        <%= link_to(root_path, class: 'navbar-item') do %>
+          <%= image_tag 'abalone_logo.png' %>
+          <h1 class="text-gray-900 font-bold pl-2">Abalone Analytics</h1>
+        <% end %>
+        <a role="button" data-target="nav-menu" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="nav-menu" class="pl-2 navbar-menu">
+        <div class="navbar-start">
+          <% if current_user %>
+            <%= link_to 'Reports', reports_path, class: 'navbar-item'%>
+            <%= link_to 'Facilities', facilities_path, class: 'navbar-item' %>
+            <%= link_to 'Enclosures', enclosures_path, class: 'navbar-item'%>
+            <%= link_to 'Animals', animals_path, class: 'navbar-item'%>
+            <%= link_to 'Cohorts', cohorts_path, class: 'navbar-item'%>
+            <%= link_to 'Operations', operations_path, class: 'navbar-item'%>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Uploads
+              </a>
+              <div class="navbar-dropdown">
+                <%= link_to 'Data Import', new_measurement_path, class: 'navbar-item'%>
+                <%= link_to 'CSV Uploads', csv_index_path, class: 'navbar-item' %>
+                <%= link_to 'Files List', file_uploads_path, class: 'navbar-item'%>
+                <%= link_to 'Upload a file', new_file_upload_path, class: 'navbar-item'%>
+              </div>
+            </div>
+            <% if current_user.admin? %>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  Admin
+                </a>
+                <div class="navbar-dropdown">
+                  <%= link_to 'Measurement Types', measurement_types_path, class: 'navbar-item'%>
+                  <%= link_to 'Users', users_path, class: 'navbar-item'%>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <%= link_to 'About', about_path, class: 'navbar-item' %>
+
+              <a href="https://rubyforgood.org/" target="_blank" class="navbar-item">
+                Ruby for Good
+              </a>
+
+              <hr class="navbar-divider">
+
+              <a href="https://github.com/rubyforgood/abalone" target="_blank" class="navbar-item">
+                Github
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <% if user_signed_in? %>
+                <%= link_to "Change password", edit_password_path(current_user), class: "button is-grey-light" %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button is-grey-light" %>
+              <% else %>
+                <%= link_to "Login", new_user_session_path, class: "button is-grey-light button-outline-primary" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <% if notice %>
+      <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+        <p class="font-bold"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold"><%= alert %></strong>
+      </div>
+    <% end %>
+
+    <%= yield %>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'application', 'tailwind' %>
+  </body>
+</html>

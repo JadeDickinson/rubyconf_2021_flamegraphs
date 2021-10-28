@@ -1,0 +1,37 @@
+<%= form_with(model: enclosure, local: true, html: { class: "w-full max-w-md" }) do |form| %>
+  <% if enclosure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(enclosure.errors.count, "error") %> prohibited this enclosure from being saved:</h2>
+
+      <ul>
+      <% enclosure.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <div>
+      <%= form.label :location_id, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.collection_select :location_id, @locations, :id, :name_with_facility, include_blank: true, class: 'input mb-2' %>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <%= form.label :name, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :name, class: 'input mb-2' %>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <%= form.submit('Submit', class: 'bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4') %>
+    </div>
+  </div>
+<% end %>

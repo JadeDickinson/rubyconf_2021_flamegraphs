@@ -1,0 +1,66 @@
+<%= form_with(model: animal, local: true, html: { class: "w-full max-w-md" }) do |form| %>
+  <% if animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
+      <ul>
+      <% animal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <div>
+      <%= form.label :collection_year, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :collection_year, class: 'input mb-2' %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= form.label :date_time_collected, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :date_time_collected, class: 'input mb-2' %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= form.label :tag, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :tag, class: 'input mb-2' %>
+    </div>
+  </div>
+  <div class="mb-2">
+    <div>
+      <%= form.label :sex, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.collection_select :sex, Animal.sexes.map { |sex| [sex.first, sex.first.humanize] }, :first, :second, class: 'input mb-2' %>
+    </div>
+  </div>
+  <div class="mb-2">
+    <div>
+      <%= form.label :cohort, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.collection_select :cohort_id, Cohort.for_organization(current_organization), :id, :name, include_blank: 'Select Cohort', class: 'input mb-2' %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= form.label :shl_numbers, class: 'text-sm text-caption-light font-medium uppercase' %>
+      <small>(separate using commas)</small>
+    </div>
+    <div>
+      <%= form.text_field :shl_numbers_codes, value: animal.shl_number_codes, class: 'input mb-2' %>
+    </div>
+  </div>
+  <div>
+    <div>
+      <%= form.submit('Submit', class: 'bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4') %>
+    </div>
+  </div>
+<% end %>

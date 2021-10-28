@@ -1,0 +1,38 @@
+<section class="h-screen bg-background p-12">
+  <div class="container lg:max-w-xl mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <p id="notice"><%= notice %></p>
+    <div class="flex justify-between items-start mb-4">
+      <%= link_to animals_path do %>
+        <button class="text-primary-dark hover:text-primary font-bold py-2 rounded inline-flex items-center">
+          <span><< Back</span>
+        </button>
+      <% end %>
+      <%= link_to edit_animal_path(@animal) do %>
+        <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
+          <span>Edit Animal</span>
+        </button>
+      <% end %>
+    </div>
+    <div>
+      <h1 class="text-title3 mb-4">Animal</h1>
+    </div>
+    <div class="block">
+        <div class="text-sm text-caption-light font-medium uppercase">Collection Year</div>
+        <%= @animal.collection_year %>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">Date Collected</div>
+        <%= @animal.date_time_collected %>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">Collection Position</div>
+        <%= @animal.collection_position %>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">Tag</div>
+        <%= @animal.tag %>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">Sex</div>
+        <%= @animal.sex.humanize %>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">Cohort</div>
+        <%= @animal.cohort_name %>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">SHL Numbers</div>
+        <%= @animal.shl_number_codes(", ") %>
+    </div>
+    <%= link_to '<< BACK', animals_path, class: "mr-3 mb-3 button-outline-primary" %>
+    <%= link_to "Edit", edit_animal_path(@animal), class: "button-outline-primary mt-4" %>
+  </div>
+</section>
