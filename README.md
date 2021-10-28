@@ -42,6 +42,7 @@ Add the following to Gemfile below your database gem e.g. `pg`, `mysql`, `mongoi
 gem 'rack-mini-profiler', '~> 2.2.1'
 gem 'memory_profiler'
 gem 'stackprof'
+gem 'flamegraph'
 ```
 
 ## Notes on use of Abalone as example
