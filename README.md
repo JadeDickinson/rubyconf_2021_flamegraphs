@@ -34,6 +34,16 @@ gem 'memory_profiler'
 gem 'stackprof'
 ```
 (from https://github.com/MiniProfiler/rack-mini-profiler#installation)
+
+## Installation of Rack Mini Profiler with `flamegraph` renderer for your own project
+Add the following to Gemfile below your database gem e.g. `pg`, `mysql`, `mongoid` and run bundle install:
+
+```ruby
+gem 'rack-mini-profiler', '~> 2.2.1'
+gem 'memory_profiler'
+gem 'stackprof'
+```
+
 ## Notes on use of Abalone as example
 Please note my use of Abalone as an example isn't to suggest this app is slow. I simply found while contributing to it last Hacktoberfest that the setup instructions are very clear. It is a good example of a Rails app where we can recognise common patterns in flamegraphs. We’ll mainly use it to get comfortable with reading flamegraphs before looking at your own projects.
 
