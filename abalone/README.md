@@ -18,15 +18,47 @@ This application is built on following and you must have these installed before 
 * Rails (6.0.3.4)
 * PostgreSQL (tested on 9.x)
 * Yarn
+* Some Node Version Manager e.g. nodenv, nvm.
 
 ### Setup
 After *forking* this repo and cloning your own copy onto your local machine, execute the following commands in your CLI:
 ```
 cd abalone
 gem install bundler
+gem install rails
 bundle install
+
+Make sure you have the right node version:
+nvm install 15.14.0
+nvm use 15.14.0
+OR
+nodenv install 15.14.0
+nodenv local 15.14.0
+
 yarn install
 bin/webpack
+
+If you don't have postgres installed:
+brew install postgres
+
+If you need to start postgres:
+brew services start postgresql
+
+If you get an error saying there is no role postgres:
+Create a postgresql role manually:
+createuser -s -r postgres
+If you get an error saying the createuser command doesn't exist:
+Add this to your ~/.bash_profile, save and run source ~/.bash_profile:
+export PATH="$PATH:/usr/local/opt/postgresql@13/bin"
+
+sudo chown -R $(whoami) /usr/local/var
+
+postgres version 13 works for sure.
+postgres -V
+brew uninstall postgresql
+brew install postgresql@13
+brew services start postgresql@13
+
 rake db:create
 rake db:migrate
 rake db:seed
