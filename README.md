@@ -10,7 +10,7 @@ This workshop assumes you have a basic grasp of Ruby, either running on Rails or
 
 This workshop uses Abalone, a Rails app from Ruby for Good, as an example. I'd recommend you set this up locally before the workshop.
 
-To do this, clone a copy of https://github.com/JadeDickinson/rubyconf_2021_flamegraphs onto your local machine, change directory into abalone and follow the setup instructions:
+To do this, clone this repo onto your local machine, change directory into abalone and follow the setup instructions:
 https://github.com/JadeDickinson/rubyconf_2021_flamegraphs/tree/main/abalone#prerequisites
 
 To check you've got everything set up ok, check you can login to the app using these details:
