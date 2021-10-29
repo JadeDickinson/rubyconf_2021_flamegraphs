@@ -22,6 +22,7 @@ This application is built on following and you must have these installed before 
 ### Setup
 After *forking* this repo and cloning your own copy onto your local machine, execute the following commands in your CLI:
 ```
+cd abalone
 gem install bundler
 bundle install
 yarn install
