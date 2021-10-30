@@ -120,37 +120,6 @@ rake jobs:clear
 
 This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/blob/master/blazer-reporting.md#dev-environment) to get started.
 
-## Docker
-
-We are currently experimenting with Docker for development. While we would love for more people to try it out be forewarned - Docker functionality may not be maintained moving forward. You will need Docker and docker-compose.
-
-* [Docker Desktop](https://www.docker.com/products/docker-desktop) is recommended for Windows and Mac computers.
-* The `make` utility can also make your development life easier. It it usually already installed on Linux and Mac computers. For Windows, an easy way to install it is via [Chocolatey](https://chocolatey.org/install), a software package management system similar to Homebrew for Windows. Once Chocolatey is installed, install make with `choco install make` in a command prompt running as Administrator.
-* If you run into issues using Docker Desktop on windows, we recommend you view [this page](https://github.com/mdworken/MKD-Docker-Windows-Rails) for troubleshooting info.
-
-### Starting Fresh
-
-To start the application in development mode:
-
-* `docker-compose up --detach db` to start the database
-* `docker-compose up --rm schema_migrate` to bring the database schema up-to-date
-* `docker-compose up --detach web delayed_job` to start the web and background job processes
-
-Or, run only this:
-
-* `make minty_fresh` to do all of the above
-
-The web app will be available on your host at `http://localhost:3000`. The logs for the web app and delayed_job processes can be seen and followed with the `make watch` command.
-
-### Some Routine Tasks
-
-* `make spec` will run the RSpec tests
-* `make lint` will run the Rubocop linting and style checks
-* `make test` will run both of the above
-* `make build` will build the Docker image for the abalone application. You'll need to run this occasionally if the gem libraries for the project are updated.
-* `make database_seeds` will seed the database according to `seeds.rb`.
-* `make nuke` will stop all Abalone docker services, remove containers, and delete the development and test databases. This is also used in the `make minty_fresh` command to restart the development and test environment with a clean slate.
-
 ### Only the Database
 
 Some developers prefer to run the Ruby and Rails processes directly on their host computers instead of running everything in contianers.
