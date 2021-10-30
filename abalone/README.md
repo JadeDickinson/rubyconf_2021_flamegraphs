@@ -18,7 +18,6 @@ This application is built on following and you must have these installed before 
 * Rails (6.0.3.4)
 * PostgreSQL (tested on 9.x)
 * Yarn
-* Some Node Version Manager e.g. nodenv, nvm.
 
 ### Setup
 After *forking* this repo and cloning your own copy onto your local machine, execute the following commands in your CLI:
@@ -28,40 +27,59 @@ gem install bundler
 gem install rails
 bundle install
 
-Make sure you have the right node version:
-nvm install 15.14.0
-nvm use 15.14.0
-OR
-nodenv install 15.14.0
-nodenv local 15.14.0
-
 yarn install
 bin/webpack
-
-If you don't have postgres installed:
-brew install postgres
-
-If you need to start postgres:
-brew services start postgresql
-
-If you get an error saying there is no role postgres:
-Create a postgresql role manually:
-createuser -s -r postgres
-If you get an error saying the createuser command doesn't exist:
-Add this to your ~/.bash_profile, save and run source ~/.bash_profile:
-export PATH="$PATH:/usr/local/opt/postgresql@13/bin"
-
-sudo chown -R $(whoami) /usr/local/var
-
-postgres version 13 works for sure.
-postgres -V
-brew uninstall postgresql
-brew install postgresql@13
-brew services start postgresql@13
 
 rake db:create
 rake db:migrate
 rake db:seed
+```
+### Troubleshooting setup
+If you have issues running yarn install, set a specific version of node as follows.
+Run these commands if you are using NVM as your Node Version Manager:
+
+```
+nvm install 16.9.1
+nvm use 16.9.1
+```
+
+Or if you are using nodenv, run these commands:
+
+```
+nodenv install 16.9.1
+nodenv local 16.9.1
+```
+
+If you don't have postgres installed:
+```
+brew install postgres
+```
+
+If you need to start postgres:
+```
+brew services start postgresql
+```
+
+If you get an error saying there is no postgres role:
+Create a postgresql role manually:
+```
+createuser -s -r postgres
+```
+
+If you get an error saying the createuser command doesn't exist:
+Add this to your ~/.bash_profile, save and run `source ~/.bash_profile`:
+```
+export PATH="$PATH:/usr/local/opt/postgresql@13/bin"
+```
+```
+sudo chown -R $(whoami) /usr/local/var
+```
+Postgres version 13 works, if you need to use it:
+```
+postgres -V
+brew uninstall postgresql
+brew install postgresql@13
+brew services start postgresql@13
 ```
 
 Webpack dependencies can be rebuilt on command with `bin/webpack`. Alternatively you can run `bin/webpack-dev-server` in another terminal window. This will effectively run `bin/webpack` for you whenever files change.
