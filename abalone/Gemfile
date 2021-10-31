@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.10'
 # Be sure to require rack_mini_profiler below the pg and mysql gems in your Gemfile.
 # rack_mini_profiler will identify these gems if they are loaded to insert instrumentation.
 # If included too early no SQL will show up.
-gem 'rack-mini-profiler'
+gem 'rack-mini-profiler', '~>2.3.3'
 gem 'memory_profiler'
 gem 'stackprof'
 
